@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="apply_inherit" inherit_id="website_hr_recruitment.apply">
+        <xpath expr="//t" position="replace">
+            <t t-call="website.layout">
+                <style>
+                    .wrapper-progressBar {
+                    width: 100%
+                    }
+
+                    .progressBar {
+                    }
+
+                    .progressBar li {
+                    list-style-type: none;
+                    float: left;
+                    width: 20%;
+                    position: relative;
+                    text-align: center;
+                    }
+
+                    .progressBar li:before {
+                    content: " ";
+                    line-height: 30px;
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                    border: 1px solid #ddd;
+                    display: block;
+                    text-align: center;
+                    margin: 0 auto 10px;
+                    background-color: white
+                    }
+
+                    .progressBar li:after {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 2px;
+                    background-color: #ddd;
+                    top: 15px;
+                    left: -50%;
+                    z-index: -1;
+                    }
+
+                    .progressBar li:first-child:after {
+                    content: none;
+                    }
+
+                    .progressBar li.active {
+                    color: dodgerblue;
+                    }
+
+                    .progressBar li.active:before {
+                    border-color: dodgerblue;
+                    background-color: dodgerblue
+                    }
+
+                    .progressBar li.active + li:after {
+                    background-color: dodgerblue;
+                    }
+                </style>
+                <t t-set="additional_title">Apply Job</t>
+
+                <div id="wrap"  class="container">
+                    <h1 class="text-center mt-2">
+                        Job Application Form
+                    </h1>
+                    <h2 t-if="job" class="text-center text-muted">
+                        <span t-field="job.name"/>
+                    </h2>
+                    <h5 class="text-center mt-3">
+                        Pelamar / Pekerja TIDAK dipungut biaya (BUKAN Termasuk Deposit)
+                    </h5>
+                    <h6 class="text-center mt-3">
+                        Masukan Data Terbaru anda, pastikan data yang dimasukan  benar dan valid. Pada saat datang
+                        interview diharapkan membawa cv dan data pribadi lengkap dengan Pakaian Bebas Rapi.
+                    </h6>
+                    <!--                    <span class="hidden" data-for="hr_recruitment_form" t-att-data-values="{'department_id': job and job.department_id.id or '', 'ratecard_id': job and job.ratecard_id.id or '','quota_id': job and job.quota_id.id or '','employee_id': job and job.aro_id.id or '', 'job_id': job and job.id or ''}" />-->
+                    <span class="hidden" data-for="hr_recruitment_form" t-att-data-values="{'department_id': job and job.department_id.id or '', 'job_id': job and job.id or ''}" />
+                    <div id="jobs_section">
+                        <section id="forms" class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                            <div class="container">
+                                <div class="wrapper-progressBar">
+                                    <ul class="progressBar">
+                                        <li id="first" class="tg-active active">Periksa NIK</li>
+                                        <li id="second" class="tg-active">Data Pribadi</li>
+                                        <li id="third" class="tg-active">Data Kualifikasi</li>
+                                        <li id="four" class="tg-active">Data Lain-Lain</li>
+                                        <li id="five" class="tg-active">Data Keluarga</li>
+                                    </ul>
+                                </div>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <form role="form" id="hr_recruitment_form" action="/job/success/" method="POST" enctype="multipart/form-data" class="o_mark_required">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <input type="hidden" name="state" t-att-value="state"/>
+                                    <br></br>
+                                    <div class="s_website_form_rows row s_col_no_bgcolor">
+                                        <div class="s_website_form_rows row s_col_no_bgcolor" id="first_form">
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment1">
+                                                        <span class="s_website_form_label_content">NIK</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment1" type="text" class="form-control s_website_form_input" name="nik" required="1"/>
+                                                        <input type="hidden" name="nik_applicant" t-att-value="nik_applicant"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment2">
+                                                        <span class="s_website_form_label_content">Upload KTP</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment2" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="ktp_pict" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_dnone">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment3">
+                                                        <span class="s_website_form_label_content">Job</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment3" type="hidden" class="form-control s_website_form_input" name="job_id"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_dnone">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment4">
+                                                        <span class="s_website_form_label_content">Department</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment4" type="hidden" class="form-control s_website_form_input" name="department_id"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="s_website_form_rows row s_col_no_bgcolor d-none" id="second_form">
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment5">
+                                                        <span class="s_website_form_label_content">Name</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment5" type="text" class="form-control s_website_form_input" name="partner_name" required="1" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="email" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment6">
+                                                        <span class="s_website_form_label_content">Email</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment6" type="email" class="form-control s_website_form_input" name="email_from" required="1" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment7">
+                                                        <span class="s_website_form_label_content">Handphone</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment7" type="tel" class="form-control s_website_form_input" name="partner_phone" required="1"  placeholder="e.g 6281500000000"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Kota Lahir</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select id="state" name="kota_lahir" required="True" placeholder="kota" class="form-control">
+                                                            <t t-foreach="city" t-as="c">
+                                                                <option t-att-value="c.id" t-esc="c.name"/></t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Tanggal Lahir</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input type="date" id="birth" name="birth" class="form-control o_website_form_date datepicker" placeholder="Date of Birth" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Jenis Kelamin</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select class="form-control o_website_form_input" name="gender_employee" id="gender_employee" required="1">
+                                                            <option value="male">Laki-Laki</option>
+                                                            <option value="female">Perempuan</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Tinggi dan Berat</span>
+                                                    </label>
+                                                    <div class="col-lg-3 col-md-4 ">
+                                                        <input type="number" name="height" id="height" class="form-control o_website_form_input" placeholder="Tinggi (CM)" required="1"/>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4">
+                                                        <input type="number" name="weight" id="weight" class="form-control o_website_form_input" placeholder="Berat (KG)" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Agama</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select class="form-control o_website_form_input" name="religion_employee" id="religion" required="1">
+                                                            <option value="islam">Islam</option>
+                                                            <option value="kristen">Kristen</option>
+                                                            <option value="katholik">Katholik</option>
+                                                            <option value="hindu">Hindu</option>
+                                                            <option value="budha">Budha</option>
+                                                            <option value="konghucu">Kong Hu Cu</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment8">
+                                                        <span class="s_website_form_label_content">Alamat KTP</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment8" type="text" class="form-control s_website_form_input" name="partner_address" required="1" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Kota KTP</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select id="kota_ktp" name="kota_ktp" required="True" placeholder="kota"  class="form-control">
+                                                            <t t-foreach="city" t-as="c">
+                                                                <option t-att-value="c.id" t-esc="c.name"/></t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment9">
+                                                        <span class="s_website_form_label_content">Alamat Domisili</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment9" type="text" class="form-control s_website_form_input" name="partner_domicile" required="1" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Provinsi Domisili</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select id="province_domisili" name="province_domisili" required="True" placeholder="provinisi" class="form-control">
+                                                            <t t-foreach="province" t-as="p">
+                                                                <option t-att-value="p.id" t-esc="p.name"/></t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Kota Domisili</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select id="kota_domisili" name="kota_domisili" required="True" placeholder="kota" class="form-control">
+                                                            <t t-foreach="city" t-as="c">
+                                                                <option t-att-value="c.id" t-esc="c.name"/></t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Status Kawin</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select class="form-control o_website_form_input" name="status_nikah" id="status_nikah" required="1">
+                                                            <option value="k0">K/0 - Nikah, Tanpa Anak</option>
+                                                            <option value="k1">K/1 - Nikah, Anak 1</option>
+                                                            <option value="k2">K/2 - Nikah, Anak 2</option>
+                                                            <option value="k3">K/3 - Nikah, Anak 3</option>
+                                                            <option value="tk0">TK/0 - Tidak Nikah</option>
+                                                            <option value="tk1">TK/1 - Tidak Nikah, 1 Tanggungan</option>
+                                                            <option value="tk2">TK/2 - Tidak Nikah, 2 Tanggungan</option>
+                                                            <option value="tk3">TK/3 - Tidak Nikah, 3 Tanggungan</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment10">
+                                                        <span class="s_website_form_label_content">Nama Social Media</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment10" type="text" class="form-control s_website_form_input" name="social_media_name" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="s_website_form_rows row s_col_no_bgcolor d-none" id="third_form">
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Pendidikan Terakhir</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select id="employee_education" name="employee_education" required="True" placeholder="Pendidikan" class="form-control">
+                                                            <t t-foreach="employee_education" t-as="ed">
+                                                                <option t-att-value="ed.id" t-esc="ed.name"/></t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment11">
+                                                        <span class="s_website_form_label_content">Upload Foto Ijazah</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment11" type="file"  accept="image/png,application/pdf"  class="form-control s_website_form_input" name="foto_ijazah" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment12">
+                                                        <span class="s_website_form_label_content">Upload Foto SKCK</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment12" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_skck" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment13">
+                                                        <span class="s_website_form_label_content">Upload Foto Profile</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment13" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_profile" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment14">
+                                                        <span class="s_website_form_label_content">Jurusan</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment14" type="text" class="form-control s_website_form_input" name="jurusan" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment15">
+                                                        <span class="s_website_form_label_content">Upload Foto Refrensi</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment15" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_refrensi"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="s_website_form_rows row s_col_no_bgcolor d-none" id="four_form">
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Nama Bank</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select id="bank_name" name="bank_name" required="True" placeholder="Nama Bank" class="form-control">
+                                                            <t t-foreach="bank" t-as="bnk">
+                                                                <option t-att-value="bnk.id" t-esc="bnk.name"/></t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment16">
+                                                        <span class="s_website_form_label_content">Nomor Rekening</span>
+                                                        <span class="s_website_form_mark"> *</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment16" type="text" class="form-control s_website_form_input" name="rekening_number" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment17">
+                                                        <span class="s_website_form_label_content">Upload Foto Tabungan</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment17" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="tabungan_image" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="recruitment16">
+                                                        <span class="s_website_form_label_content">Atas Nama Rekening</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="recruitment18" type="text" class="form-control s_website_form_input" name="rekening_name" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="have_a_npwp">
+                                                        <span class="s_website_form_label_content">Punya NPWP</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="have_a_npwp" type="checkbox" style="width: 20px;" name="have_a_npwp" value="npwp" class="form-control o_website_form_input" onclick="toggleNPWP(this);"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required d-none" data-type="char" name="npwp_div" id='npwp_div' data-name="Field" >
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="nomor_npwp">
+                                                        <span class="s_website_form_label_content">Nomor NPWP</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="nomor_npwp" type="text" class="form-control s_website_form_input" name="npwp_number"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom d-none" data-type="binary" data-name="Field"  name="pict_npwp_div" id="pict_npwp_div">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="foto_npwp">
+                                                        <span class="s_website_form_label_content">Upload Foto NPWP</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="foto_npwp" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_npwp"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field" >
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="nomor_bpjstk">
+                                                        <span class="s_website_form_label_content">Nomor BPJS Ketenagakerjaan</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="nomor_bpjstk" type="text" class="form-control s_website_form_input" name="nomor_bpjstk"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="foto_bpjtk">
+                                                        <span class="s_website_form_label_content">Upload Foto BPJS Ketenagakerjaan</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="foto_bpjtk" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_bpjtk"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="nomor_bpjsks">
+                                                        <span class="s_website_form_label_content">Nomor BPJS Kesehatan</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="nomor_bpjsks" type="text" class="form-control s_website_form_input" name="nomor_bpjsks"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="foto_bpjsks">
+                                                        <span class="s_website_form_label_content">Upload BPJS Kesehatan</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="foto_bpjsks" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_bpjsks"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="surat_sehat">
+                                                        <span class="s_website_form_label_content">Keterangan Surat Sehat</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="surat_sehat" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="surat_sehat"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="asuransi">
+                                                        <span class="s_website_form_label_content">Asuransi Tambahan</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="asuransi" type="text" class="form-control s_website_form_input" name="asuransi"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="foto_asuransi">
+                                                        <span class="s_website_form_label_content">Foto Kartu Asuransi Tambahan</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="foto_asuransi" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_asuransi"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Status Vaksin</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select class="form-control o_website_form_input" name="status_vaksin">
+                                                            <option value="vaksin">Sudah Vaksi</option>
+                                                            <option value="not_vaksin">Belum Vaksin</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="pict_vaksin">
+                                                        <span class="s_website_form_label_content">Foto Sertifikat Vaksin</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="pict_vaksin" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="pict_vaksin"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="s_website_form_rows row s_col_no_bgcolor d-none" id="five_form">
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="kk_number">
+                                                        <span class="s_website_form_label_content">Nomor KK</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="kk_number" type="text" class="form-control s_website_form_input" name="kk_number" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_custom" data-type="binary" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="foto_kk">
+                                                        <span class="s_website_form_label_content">Upload Foto KK</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="foto_kk" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_kk" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="mother_name">
+                                                        <span class="s_website_form_label_content">Nama Ibu Kandung</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="mother_name" type="text" class="form-control s_website_form_input" name="mother_name" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="husband_or_wife">
+                                                        <span class="s_website_form_label_content">Nama Suami/Istri</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="husband_or_wife" type="text" class="form-control s_website_form_input" name="husband_or_wife"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required d-none" data-type="char" data-name="Field" name="first_child_div">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="first_child_name">
+                                                        <span class="s_website_form_label_content">Nama Anak Pertama</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="first_child_name" type="text" class="form-control s_website_form_input" name="first_child_name"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required d-none" data-name="Field" name="pict_first_child_div">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Tanggal Lahir Anak Pertama</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input type="date" name="child_birth" class="form-control o_website_form_date datepicker"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required d-none" data-type="char" data-name="Field" name="second_child_div">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="second_child_name">
+                                                        <span class="s_website_form_label_content">Nama Anak Kedua</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="second_child_name" type="text" class="form-control s_website_form_input" name="second_child_name"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required d-none" data-name="Field" name="pict_second_child_div">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Tanggal Lahir Anak Kedua</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input type="date" name="child_birth2" class="form-control o_website_form_date datepicker"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required d-none" data-type="char" data-name="Field" name="third_child_div">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="third_child_name">
+                                                        <span class="s_website_form_label_content">Nama Anak Ketiga</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="third_child_name" type="text" class="form-control s_website_form_input" name="third_child_name"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required d-none" data-name="Field" name="pict_third_child_div">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Tanggal Lahir Anak Ketiga</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input type="date" name="child_birth3" class="form-control o_website_form_date datepicker"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="contact_emergency">
+                                                        <span class="s_website_form_label_content">Nama Kontak Emergency</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="contact_emergency" type="text" class="form-control s_website_form_input" name="contact_emergency" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required s_website_form_model_required" data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="contact_emergency_number">
+                                                        <span class="s_website_form_label_content">Nomor Kontak Emergency</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="contact_emergency_number" type="text" class="form-control s_website_form_input" name="contact_emergency_number" required="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-12 s_website_form_field s_website_form_required">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                        <span class="s_website_form_label_content">Jenis Relasi</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <select class="form-control o_website_form_input" id="jenis_relasi" name="jenis_relasi" required="1">
+                                                            <option value="parent">Orang Tua</option>
+                                                            <option value="husband_wife">Suami/Istri</option>
+                                                            <option value="siblings">Sudara Kandung</option>
+                                                            <option value="uncle_aunt">Paman / Bibi</option>
+                                                            <option value="others">Lainnya</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 s_website_form_submit" data-name="Submit Button">
+                                            <div style="width: 200px;" class="s_website_form_label"/>
+                                            <button onClick="onClickBack(state.value)" id="not_sub_back" class="btn tn-secondary btn-lg s_website_form_send pull-left d-none" style="margin-right:20px;">
+                                                Back
+                                            </button>
+                                            <button onclick="onClick(state.value)" id="not_sub" class="btn btn-primary btn-lg s_website_form_send pull-left" style="margin-right:20px;" >
+                                                Next
+                                            </button>
+                                            <button type="submit" onclick="onClickSubmit()" id="sub" class="btn btn-primary btn-lg pull-left d-none" style="margin-right:20px;">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="oe_structure mt-2"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+    <template id="assets_frontend_on_click" name="front_end_assets" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/asb_hr_recruitment/static/src/js/on_click.js"/>
+        </xpath>
+    </template>
+</odoo>

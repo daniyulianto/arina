@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_job_inherit_form">
+            <field name="name">hr.employee.form.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[1]" position="replace">
+                    <group>
+                        <group>
+                            <field name="ratecard_id"/>
+                            <field name="quota_id"/>
+                            <field name="aro_id"/>
+                        </group>
+                        <group>
+                            <field name="mobile_phone" widget="phone"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="department_id"/>
+                            <field name="parent_id"/>
+                            <field name="coach_id"/>
+                        </group>
+                    </group>
+
+                </xpath>
+                <xpath expr="//field[@name='address_id']" position="attributes">
+                    <attribute name="string">Company Address</attribute>
+                </xpath>
+                <xpath expr="//field[@name='work_location']" position="before">
+                    <field name="principle_id"
+                           context="{'show_address': 1}"
+                           options='{"always_reload": True, "highlight_first_line": True}'/>
+                </xpath>
+                <xpath expr="//page[@name='public']/div/div[@id='o_work_employee_main']" position="inside">
+                    <group string="Employee Information">
+                        <field name="karyawan_status"/>
+                        <field name="grade"/>
+                    </group>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']/group/group[1]" position="inside">
+                    <field name="domicile_address"/>
+                    <label for="domicile_city"/>
+                    <div class="o_row">
+                        <field name="domicile_city" nolabel="1" placeholder="Kota Domisili"/>
+                        <field name="province_id" nolabel="1" placeholder="Provinsi Domisili"/>
+                    </div>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']/group/group[2]" position="inside">
+                    <field name="no_npwp"/>
+                    <field name="no_kk"/>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']/group/group[3]" position="inside">
+                    <field name="marital_status"/>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']/group/group[5]" position="inside">
+                    <field name="emergency_relation"/>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']/group/group[7]" position="inside">
+                    <field name="education_id"/>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']/group" position="after">
+
+                    <group string="Family Member">
+                        <group>
+                            <field name="mother_name"/>
+                            <field name="husban_or_wife"/>
+                        </group>
+                        <group></group>
+                        <group attrs="{'invisible': [('marital_status', 'in', ('k0','tk0'))]}">
+                            <field name="first_child"/>
+                            <field name="second_child"/>
+                            <field name="third_child"/>
+                        </group>
+                        <group attrs="{'invisible': [('marital_status', 'in', ('k0','tko'))]}">
+                            <field name="first_child_birth" />
+                            <field name="second_child_birth"/>
+                            <field name="third_child_birth"/>
+                        </group>
+                    </group>
+                    <group string="Document Attachment">
+                        <group>
+                            <field name="file_ktp" filename="file_name_ktp"/>
+                            <field name="file_name_ktp" invisible="1" />
+                            <field name="file_ijazah" filename="file_name_ijazah"/>
+                            <field name="file_name_ijazah" invisible="1" />
+                            <field name="file_npwp" filename="file_name_npwp"  />
+                            <field name="file_name_npwp" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="file_buku_tabungan" filename="file_name_buku_tabungan"  />
+                            <field name="file_name_buku_tabungan" invisible="1" />
+                            <field name="file_skck" filename="file_name_skck"  />
+                            <field name="file_name_skck" invisible="1" />
+                            <field name="file_kk" filename="file_name_kk"  />
+                            <field name="file_name_kk" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="file_bpjstk" filename="file_name_bpjstk"  />
+                            <field name="file_name_bpjstk" invisible="1" />
+                            <field name="file_bpjsks" filename="file_name_bpjsks"  />
+                            <field name="file_name_bpjsks" invisible="1" />
+                            <field name="file_asuransi" filename="file_name_asuransi"  />
+                            <field name="file_name_asuransi" invisible="1" />
+                            <field name="file_surat_sehat" filename="file_name_surat_sehat"  />
+                            <field name="file_name_surat_sehat" invisible="1" />
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

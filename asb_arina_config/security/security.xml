@@ -1,0 +1,15 @@
+<odoo>
+    <!-- Category Group -->
+
+    <record id="module_asb_arina_conf" model="ir.module.category">
+        <field name="name">Arina config</field>
+    </record>
+
+    <!-- Group -->
+
+    <record id="group_administrator" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_asb_arina_conf"/>
+    </record> 
+
+</odoo>

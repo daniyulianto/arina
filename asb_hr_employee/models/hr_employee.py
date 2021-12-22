@@ -1,0 +1,91 @@
+from odoo import models, fields, api
+
+
+class Employee(models.Model):
+    _inherit = "hr.employee"
+    ratecard_id = fields.Many2one('rate.card', string='Ratecard')
+    quota_id = fields.Many2one('quota.quota', string='Quota')
+    aro_id = fields.Many2one('hr.employee', string='ARO')
+    karyawan_status = fields.Selection(string='Status Karyawan', related='quota_id.status_karyawan', store=True)
+    grade = fields.Char(string='Grade')
+    ktp_address = fields.Char(string='Alamat KTP')
+    ktp_city = fields.Many2one('city.city', string='Kota KTP')
+    domicile_address = fields.Char(string='Alamat Domisili')
+    domicile_city = fields.Many2one('city.city', string='Kota Domisili')
+    province_id = fields.Many2one('province.province', string='Provinsi Domisili')
+    height = fields.Integer(string='Height')
+    weight = fields.Integer(string='Weight')
+    religion = fields.Char(string='Religion')
+    marital_status = fields.Selection([
+        ("k0", "K/0 - Nikah, Tanpa Anak"), ("k1", "K/1 - Nikah, Anak 1"), ("k2", "K/2 - Nikah, Anak 2"),
+        ("k3", "K/3 - Nikah, Anak 3"), ("tk0", "Belum Menikah"), ("tk1", "TK/1 - Tidak Nikah, 1 Tanggungan"),
+        ("tk2", "TK/2 - Tidak Nikah, 2 Tanggungan"), ("tk3", "TK/3 - Tidak Nikah, 3 Tanggungan")],
+        string='Status Kawin')
+    social_media = fields.Char(string='Nama Social Media')
+    education_id = fields.Many2one('hr.employee.education', string='Pendidikan Terakhir')
+    bank_id = fields.Many2one('res.bank', string='Nama Bank')
+    account_number = fields.Char(sting='Nomor Rekening')
+    account_name = fields.Char(string='Atas Nama Rekening')
+    no_kk = fields.Char(string='No. KK')
+    have_npwp = fields.Boolean(string='Tidak Memiliki NPWP', default=False)
+    no_npwp = fields.Char(string='No. NPWP')
+    no_bpjsks = fields.Char(string='No. BPJS KES')
+    no_bpkstk = fields.Char(string='No. BPJS TK')
+    assurance = fields.Char(string='Asuransi Tambahan')
+    vaksin_status = fields.Selection([("vaksin", "Sudah Vaksin"), ("not_vaksin", "Belum Vaksin")],
+                                     string='Status Vaksin')
+    partner_id = fields.Many2one('res.partner', "Partner Address")
+    principle_id = fields.Many2one('res.partner', "Principle Address", related='quota_id.partner_id', store=True)
+    priciple_division_id = fields.Many2one('principle.division', "Divisi")
+    representative_office = fields.Many2one('representative.office', string='Kantor Perwakilan')
+    second_city = fields.Many2one('city.city', string='Second City')
+    emergency_relation = fields.Selection(
+        [("parent", "Orang Tua"), ("husband_wife", "Suami/Istri"), ("siblings", "Sudara Kandung"),
+         ("uncle_aunt", "Paman / Bibi"), ("others", "Lainnya")])
+    mother_name = fields.Char(string='Nama Ibu Kandung')
+    husban_or_wife = fields.Char(string='Nama Suami/Istri')
+    first_child = fields.Char(string='Nama Anak Pertama ')
+    second_child = fields.Char(string='Nama Anak Kedua')
+    third_child = fields.Char(string='Nama Anak Ketiga')
+    first_child_birth = fields.Date(string='Tanggal Lahir Anak ')
+    second_child_birth = fields.Date(string='Tanggal Lahir')
+    third_child_birth = fields.Date(string='Tanggal Lahir')
+    image_applicant = fields.Binary(string='File Foto Applicant', attachment=True,
+                                    max_width=128, max_height=128)
+    file_name_image_applicant = fields.Char('Foto Applicant')
+    file_ktp = fields.Binary(string='File KTP', attachment=True)
+    file_name_ktp = fields.Char('File Name KTP')
+    file_ijazah = fields.Binary(string='File Ijazah', attachment=True)
+    file_name_ijazah = fields.Char('File Name ijazah')
+    file_skck = fields.Binary(string='File SKSCK', attachment=True)
+    file_name_skck = fields.Char('File Name Surat Refrensi')
+    file_surat_refrensi = fields.Binary(string='File Surat Refrensi', attachment=True)
+    file_name_surat_refrensi = fields.Char('File Name Surat Refrensi')
+    file_buku_tabungan = fields.Binary(string='File Buku Tabungan', attachment=True)
+    file_name_buku_tabungan = fields.Char('File Name Buku Tabungan')
+    file_npwp = fields.Binary(string='File NPWP', attachment=True)
+    file_name_npwp = fields.Char('File Name NPWP')
+    file_bpjstk = fields.Binary(string='File BPJSTK', attachment=True)
+    file_name_bpjstk = fields.Char('File Name BPJSTK')
+    file_bpjsks = fields.Binary(string='File BPJSKES', attachment=True)
+    file_name_bpjsks = fields.Char('File Name BPJSKESs')
+    file_asuransi = fields.Binary(string='File Asuransi', attachment=True)
+    file_name_asuransi = fields.Char('File Name Asuransi')
+    file_kartu_vaksin = fields.Binary(string='File Kartu Vaksin', attachment=True)
+    file_name_kartu_vaksin = fields.Char('File Name Kartu Vaksin')
+    file_kk = fields.Binary(string='File Kartu Kelaurga', attachment=True)
+    file_name_kk = fields.Char('File Name Kartu Kelaurga')
+    file_surat_sehat = fields.Binary(string='File Surat Sehat', attachment=True)
+    file_name_surat_sehat = fields.Char('File Name Surat Sehat')
+    file_form_interview = fields.Binary(string='Form Interview Dengan Ttd Principle', attachment=True)
+    file_name_form_interview = fields.Char('File Form Interview')
+    file_elerning = fields.Binary(string='Sertifikat Elerning', attachment=True)
+    file_name_elerning = fields.Char('File Name Elerning')
+    resign_date = fields.Date('Resign Date', readonly=True, help="Date of the resignation")
+    resign_type = fields.Selection([
+        ('peralihan', 'Fired'),
+        ('end_project', 'End Project'),
+        ('resign', 'Resign'),
+        ('end_contract', 'End Contract')
+    ], string="Resign Type", default="resign")
+    blacklist = fields.Boolean(string="Fired", default=False, store=True, help="If checked then employee has blacklist")

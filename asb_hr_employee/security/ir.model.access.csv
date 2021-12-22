@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_blacklist_user,asb_arina_config.hr_employee_blacklist,model_hr_employee_blacklist,hr.group_hr_user,1,1,1,1
+access_hr_employee_blacklist_emp,asb_arina_config.hr_employee_blacklist,model_hr_employee_blacklist,base.group_user,1,0,0,0
+access_hr_employee_change_user,asb_arina_config.hr_employee_change,model_hr_employee_change,hr.group_hr_user,1,1,1,1
+access_hr_employee_change_emp,asb_arina_config.hr_employee_change,model_hr_employee_change,base.group_user,1,0,0,0
+access_hr_employee_resign_user,asb_arina_config.hr_employee_resign,model_hr_employee_resign,hr.group_hr_user,1,1,1,1
+access_hr_employee_resign_emp,asb_arina_config.hr_employee_resign,model_hr_employee_resign,base.group_user,1,0,0,0

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+asb_ratecard_administrator,asb_ratecard.administrator,model_rate_card,asb_ratecard.group_administrator,1,1,1,1
+asb_ratecard_administrator_line,asb_ratecard.administrator,model_rate_card_line,asb_ratecard.group_administrator,1,1,1,1
+asb_ratecard_administrator_category,asb_ratecard.administrator_category,model_rate_card_category,asb_ratecard.group_administrator,1,1,1,1
+asb_ratecard_administrator_category_line,asb_ratecard.administrator_category_line,model_rate_card_category_line,asb_ratecard.group_administrator,1,1,1,1

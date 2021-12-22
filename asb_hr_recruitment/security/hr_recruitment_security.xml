@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <record id="group_hr_recruitment_ro1" model="res.groups">
+        <field name="name">RO1</field>
+        <field name="category_id" ref="base.module_category_human_resources_recruitment"/>
+        <field name="implied_ids" eval="[(4, ref('hr_recruitment.group_hr_recruitment_user'))]"/>
+    </record>
+    <record id="group_hr_recruitment_ro2" model="res.groups">
+        <field name="name">R02</field>
+        <field name="category_id" ref="base.module_category_human_resources_recruitment"/>
+        <field name="implied_ids" eval="[(4, ref('asb_hr_recruitment.group_hr_recruitment_ro1'))]"/>
+    </record>
+    <record id="hr_recruitment.group_hr_recruitment_manager" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('asb_hr_recruitment.group_hr_recruitment_ro2'))]"/>
+    </record>
+</odoo>
