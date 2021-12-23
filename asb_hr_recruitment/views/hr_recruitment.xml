@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_res_partner_form_inherit_arina">
+            <field name="name">Jobs - Recruitment Form</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form" />
+            <field name="arch" type="xml">
+                <button name="create_employee_from_applicant" position="replace">
+                    <button name="action_nextstep" string="Next Step" type="object"
+                            class="oe_highlight" groups="hr_recruitment.group_hr_recruitment_manager, hr_recruitment.group_hr_recruitment_user" attrs="{'invisible':['|','|',('stage_arina', '=', 'joined'), ('active', '=', False), ('is_allowed', '=', False)]}"/>
+                    <button string="Create Employee" name="create_employee_from_applicant" type="object"
+                            class="oe_highlight" groups="hr_recruitment.group_hr_recruitment_manager, asb_hr_recruitment.group_hr_recruitment_ro2"
+                            attrs="{'invisible':['|','|',('emp_id', '!=', False),('stage_arina', '!=', 'joined'), ('active', '=', False)]}"
+                            confirm="Are you sure?" />
+                    <button string="Back Step" name="action_backstep" type="object" context="{'mail_off': True}" groups="hr_recruitment.group_hr_recruitment_manager, asb_hr_recruitment.group_hr_recruitment_ro2"
+                            class="btn-warning" style="color: #e9ecef;" attrs="{'invisible':['|','|',('emp_id', '!=', False), ('stage_arina', '=', 'applicant_data'), ('active', '=', False)]}"/>
+                </button>
+                <xpath expr="//field[@name='email_from']" position="before">
+                    <field name="is_allowed" invisible="1"/>
+                    <field name="ratecard_id" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                    <field name="quota_id"/>
+                    <field name="employee_id" />
+                    <field name="grade" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    <field name="no_ktp" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='type_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_mobile']" position="after">
+                    <label for="ktp_address"/>
+                    <div class="o_raw">
+                        <field name="ktp_address" nolabel="1" placeholder="Alamat KTP" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                        <field name="ktp_city" nolabel="1" placeholder="Kota Domisili" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    </div>
+                    <field name="domicile_address" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    <label for="domicile_city"/>
+                    <div class="o_row">
+                        <field name="domicile_city" nolabel="1" placeholder="Kota Domisili" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="province_id" nolabel="1" placeholder="Provinsi Domisili" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    </div>
+                    <label for="place_of_birth" string="Kota, Tanggal Lahir"/>
+                    <div class="o_row">
+                        <field name="place_of_birth" nolabel="1" placeholder="Kota" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="birth" nolabel="1" placeholder="Tanggal Lahir" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    </div>
+                    <field name="gender" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    <label for="height"/>
+                    <div class="o_row">
+                        <field name="height" string="Height" attrs="{'readonly':[('is_allowed','=',False)]}"/><span>cm</span>
+                        <label for="weight"/>
+                        <field name="weight" attrs="{'readonly':[('is_allowed','=',False)]}"/><span>kg</span>
+                    </div>
+                    <field name="religion" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    <field name="marital_status" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    <field name="social_media" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    <field name="stage_arina" invisible="1"/>
+                </xpath>
+                <field name="kanban_state" position="after">
+                    <field name="image_applicant" widget="image" filename="file_name_image_applicant" class="oe_avatar" modifiers="{}" style="margin-right:35px;" options="{'preview_image': 'image_applicant'}" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                </field>
+                <xpath expr="//sheet/group/group" position="after">
+                    <group>
+                        <field name="education_id" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="major_education" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="bank_id" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="account_number" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="account_name" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="no_kk" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="have_npwp" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="no_npwp" attrs="{'invisible': [('have_npwp', '=', True)], 'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="no_bpjsks" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                        <field name="no_bpkstk" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="assurance" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="vaksin_status" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    </group>
+                </xpath>
+                <xpath expr="//sheet/group/group[3]" position="attributes">
+                    <attribute name="string">Other</attribute>
+                </xpath>
+                <xpath expr="//sheet/group/group[5]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//sheet/group/group[2]" position="after">
+                    <group string='Emergency Contact'>
+                        <field name="emergency_name" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="emergency_mobile" widget="phone" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                        <field name="emergency_relation" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='job_id']" position="after">
+                    <field name="karyawan_status" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    <field name="nip" attrs="{'invisible':[('stage_arina', 'in', ['applicant_data','first_interview','second_interview'])], 'readonly':[('is_allowed','=',False)]}"/>
+                    <field name="principle_id" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                    <field name="priciple_division_id" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    <field name="representative_office" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                    <field name="second_city" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//sheet/group" position="after">
+                    <notebook>
+                        <page string='Data Keluarga'>
+                            <group>
+                                <group>
+                                    <field name="mother_name" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="husban_or_wife" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                </group>
+                                <group>
+                                </group>
+                                <group attrs="{'invisible': [('marital_status', 'in', ('k0','tk0'))]}">
+                                    <field name="first_child" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="second_child" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="third_child" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                </group>
+                                <group attrs="{'invisible': [('marital_status', 'in', ('k0','tk0'))]}">
+                                    <field name="first_child_birth" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="second_child_birth" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="third_child_birth" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string='Data Pribadi'>
+                            <group>
+                                <group>
+                                    <field name="file_ktp" filename="file_name_ktp" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="file_name_ktp" invisible="1" />
+                                    <field name="file_ijazah" filename="file_name_ijazah" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="file_name_ijazah" invisible="1" />
+                                    <field name="file_npwp" filename="file_name_npwp" attrs="{'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="file_name_npwp" invisible="1" />
+                                </group>
+                                <group>
+                                    <field name="file_buku_tabungan" filename="file_name_buku_tabungan" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="file_name_buku_tabungan" invisible="1" />
+                                    <field name="file_skck" filename="file_name_skck" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="file_name_skck" invisible="1" />
+                                    <field name="file_kk" filename="file_name_kk" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="file_name_kk" invisible="1" />
+                                    <field name="file_surat_refrensi" filename="file_name_surat_refrensi" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="file_name_surat_refrensi" invisible="1" />
+                                </group>
+                                <group>
+                                    <field name="file_bpjstk" filename="file_name_bpjstk" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="file_name_bpjstk" invisible="1" />
+                                    <field name="file_bpjsks" filename="file_name_bpjsks" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="file_name_bpjsks" invisible="1" />
+                                    <field name="file_asuransi" filename="file_name_asuransi" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="file_name_asuransi" invisible="1" />
+                                    <field name="file_surat_sehat" filename="file_name_surat_sehat" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="file_name_surat_sehat" invisible="1" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string='Approval Principle' attrs="{'invisible':[('stage_arina', 'in', ['applicant_data','first_interview','second_interview'])]}">
+                            <group string="Data Approval Principal">
+                                <group>
+                                    <field name="file_form_interview" filename="file_name_form_interview"  attrs="{'required': [('stage_arina', '=', 'principal_approval')],'readonly':[('is_allowed','=',False)]}"  />
+                                    <field name="file_name_form_interview" invisible="1"  attrs="{'required': [('stage_arina', '=', 'principal_approval')]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string='E Learning' attrs="{'invisible':[('stage_arina', 'in', ['applicant_data','first_interview','second_interview','principal_approval'])]}">
+                            <group string="Dokument Elerning">
+                                <group>
+                                    <field name="file_elerning" filename="file_name_elerning" attrs="{'readonly':[('is_allowed','=',False)]}"  />
+                                    <field name="file_name_elerning" invisible="1" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string='PKWT' attrs="{'invisible':[('stage_arina', 'in', ['applicant_data','first_interview','second_interview','principal_approval','e_learning'])]}">
+                            <group>
+                                <group string="Tanggal Kontrak">
+                                    <field name="start_date_contract" attrs="{'required': [('stage_arina', '=', 'pkwt_created')],'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="end_date_contract" attrs="{'required': [('stage_arina', '=', 'pkwt_created')],'readonly':[('is_allowed','=',False)]}"/>
+                                </group>
+                                <group string="Deposit">
+                                    <field name="is_deposit" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="deposit_amount" attrs="{'invisible': [('is_deposit', '=', False)]}"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </group>
+                                <group string="Komponen Kontrak">
+                                    <field name="salary_applicant_rule_ids" nolabel="1" attrs="{'readonly':[('is_allowed','=',False)]}" >
+                                        <tree editable="bottom">
+                                            <field name="rule_id"/>
+                                            <field name="amount"/>
+                                            <field name="currency_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group string="Template PKWT">
+                                    <field name="pkwt_template_id"  attrs="{'required': [('stage_arina', '=', 'pkwt_created')],'readonly':[('is_allowed','=',False)]}"/>
+                                    <field name="file_template_pkwt" filename="file_name_template_pkwt" readonly="1" />
+                                    <field name="file_name_template_pkwt" invisible="1" />
+                                    <field name="file_pkwt_ttd" filename="file_name_pkwt_ttd" attrs="{'readonly':[('is_allowed','=',False)]}" />
+                                    <field name="file_name_pkwt_ttd" invisible="1" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+                <field name="stage_id" position="attributes">
+                    <attribute name="options">{'clickable': False, 'fold_field': 'fold'}</attribute>
+                </field>
+                <field name="name" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="partner_name" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="email_from" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="email_cc" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="partner_phone" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="partner_mobile" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="categ_ids" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="priority" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="medium_id" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="source_id" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="job_id" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+                <field name="description" position="attributes">
+                    <attribute name="attrs">{'readonly':[('is_allowed','=',False)]}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_hr_recruitment_stage_form_inherit" model="ir.ui.view">
+            <field name="name">hr.recruitment.stage.form.inherit</field>
+            <field name="model">hr.recruitment.stage</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_recruitment_stage_form" />
+            <field name="arch" type="xml">
+                <field name="fold" position="before">
+                    <field name="stage_arina" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

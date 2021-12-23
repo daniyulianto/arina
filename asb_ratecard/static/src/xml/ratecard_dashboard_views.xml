@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="Ratecard.Dashboard">
+        <div class="sd_container">
+            <!-- <div class="row"> -->
+                <div class="col-sm-12 click_woi">
+                    <table class="table table-borderless" style="border-collapse: separate; border-spacing: 5px;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; font-weight: bold; vertical-align: middle;">Draft</td>
+                                <td class="sd_column_val sd_open_action" action="asb_ratecard.rate_card_action"><t t-esc="draft.total"/><br/><span>Total Draft</span></td>
+                                <td class="sd_column_val"><t t-esc="draft.pkwt"/><br/><span>PKWT</span></td>
+                                <td class="sd_column_val"><t t-esc="draft.pkhl"/><br/><span>PKHL</span></td>
+                                <td class="sd_column_val"><t t-esc="draft.permanent"/><br/><span>Permanent</span></td>
+                                <td class="sd_column_val"><t t-esc="draft.borongan"/><br/><span>Borongan</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: bold; vertical-align: middle;">Quotation</td>
+                                <td class="sd_column_val sd_open_action" action="asb_ratecard.rate_card_action"><t t-esc="quotation.total"/><br/><span>Total Quotation</span></td>
+                                <td class="sd_column_val"><t t-esc="quotation.pkwt"/><br/><span>PKWT</span></td>
+                                <td class="sd_column_val"><t t-esc="quotation.pkhl"/><br/><span>PKHL</span></td>
+                                <td class="sd_column_val"><t t-esc="quotation.permanent"/><br/><span>Permanent</span></td>
+                                <td class="sd_column_val"><t t-esc="quotation.borongan"/><br/><span>Borongan</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: bold; vertical-align: middle;">Approved</td>
+                                <td class="sd_column_val sd_open_action" action="asb_ratecard.rate_card_action"><t t-esc="approved.total"/><br/><span>Total Approved</span></td>
+                                <td class="sd_column_val"><t t-esc="approved.pkwt"/><br/><span>PKWT</span></td>
+                                <td class="sd_column_val"><t t-esc="approved.pkhl"/><br/><span>PKHL</span></td>
+                                <td class="sd_column_val"><t t-esc="approved.permanent"/><br/><span>Permanent</span></td>
+                                <td class="sd_column_val"><t t-esc="approved.borongan"/><br/><span>Borongan</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <!-- </div> -->
+        </div>
+    </t>
+</templates>

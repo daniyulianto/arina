@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_job_inherit_form">
+            <field name="name">hr.job.inherit.form</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='description']" position="attributes">
+                    <attribute name="string">Overview Position</attribute>
+                    <attribute name="style">font-size:20px</attribute>
+                </xpath>
+                <xpath expr="//page[1]" position="inside">
+                    <div attrs="{'invisible': [('state', '!=', 'recruit')]}">
+                        <label for="website_description" string="Job Description" style="font-size:25px"/>
+                        <field name="website_description"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='address_id']" position="after">
+                    <field name="ratecard_id" readonly="1"/>
+                    <field name="quota_id" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='no_of_recruitment']" position="after">
+                    <field name="no_of_employee" readonly="1"/>
+                    <field name="expected_employees" readonly="1"/>
+                    <field name="no_of_hired_employee" readonly="1"/>
+                    <field name="aro_id" readonly="1"/>
+                    <field name="hod_id" readonly="1"/>
+                    <field name="start_date" />
+                    <field name="end_date"/>
+                    <field name="deadline_date"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

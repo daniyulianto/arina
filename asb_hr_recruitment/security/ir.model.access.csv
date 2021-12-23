@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+asb_hr_recruitment_administrator_template_pkwt,asb_hr_recruitment.administrator_template_pkwt,model_hr_template_pkwt,hr_recruitment.group_hr_recruitment_user,1,1,1,1
+asb_hr_recruitment_administrator_salary_applications,asb_hr_recruitment.administrator_salary_applications,model_hr_salary_applicant_rule,hr_recruitment.group_hr_recruitment_user,1,1,1,1

@@ -1,0 +1,15 @@
+<odoo>
+    <!-- Category Group -->
+
+    <record id="module_asb_quota" model="ir.module.category">
+        <field name="name">Quota</field>
+    </record>
+
+    <!-- Group -->
+
+    <record id="group_administrator" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_asb_quota"/>
+    </record> 
+
+</odoo>

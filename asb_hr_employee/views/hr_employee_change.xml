@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record model="ir.ui.view" id="hr_employee_change_tree">
+            <field name="name">hr.employee.change.tree</field>
+            <field name="model">hr.employee.change</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="officer_id"/>
+                    <field name="employee_id"/>
+                    <field name="ratecard_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record model="ir.ui.view" id="hr_employee_change_form">
+            <field name="name">hr.employee.change.form</field>
+            <field name="model">hr.employee.change</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_submit"
+                                string="Submit"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state', '!=', 'draft')]}"
+                        />
+                        <button name="action_confirm"
+                                string="Confirm"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state', '!=', 'submit')]}"
+                        />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="officer_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                            <group></group>
+                            <group string="Employee Data">
+                                <field name="employee_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="nip"/>
+                                <field name="partner_id"/>
+                                <field name="ratecard_id"/>
+                            </group>
+                            <group string="Perubahan Data">
+                                <field name="data_change" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="new_data" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="file_document" filename="file_name_document" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="file_name_document" invisible="1" />
+                                <field name="description" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_employee_change_action">
+            <field name="name">Employee Data Change</field>
+            <field name="res_model">hr.employee.change</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="menu_hr_employee_change"
+                name="Employee Data Change"
+                parent="hr.menu_hr_employee_payroll"
+                action="hr_employee_change_action"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="assets_backend_quota" name="Backend Assets Quota" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/asb_quota/static/src/scss/quota_dashboard.scss"/>
+            <script type="text/javascript" src="/asb_quota/static/src/js/quota_dashboard.js"/>
+        </xpath>
+    </template>
+</odoo>

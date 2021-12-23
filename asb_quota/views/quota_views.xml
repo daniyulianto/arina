@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record model="ir.ui.view" id="quota_quota_tree">
+            <field name="name">quota.quota.tree</field>
+            <field name="model">quota.quota</field>
+            <field name="arch" type="xml">
+                <tree js_class="quota_list_dashboard" create="false">
+                    <field name="name"/>
+                    <field name="status" widget="badge" decoration-warning="status == 'new'" decoration-success="status == 'replace'"/>
+                    <field name="partner_id"/>
+                    <field name="ratecard_id"/>
+                    <field name="aro_id"/>
+                    <field name="hod_id"/>
+                    <field name="area"/>
+                    <field name="secondary_city_id"/>
+                    <!-- <field name="job_title"/> -->
+                    <field name="status_karyawan" widget="badge" decoration-info="status_karyawan == 'kontrak'" decoration-warning="status_karyawan == 'magang'" decoration-success="status_karyawan == 'permanent'"/>
+                    <field name="start_date"/>
+                    <field name="running_date"/>
+                    <field name="deadline_date"/>
+                    <field name="quota_status"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-primary="state == 'pending'" decoration-warning="state == 'validate'" decoration-danger="state == 'vacant'" decoration-success="state == 'done'"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="quota_quota_replace_tree">
+            <field name="name">quota.quota.replace.tree</field>
+            <field name="model">quota.quota</field>
+            <field name="arch" type="xml">
+                <tree js_class="quota_list_dashboard">
+                    <field name="name"/>
+                    <field name="status" widget="badge" decoration-warning="status == 'new'" decoration-success="status == 'replace'"/>
+                    <field name="partner_id"/>
+                    <field name="ratecard_id"/>
+                    <field name="aro_id"/>
+                    <field name="hod_id"/>
+                    <field name="area"/>
+                    <field name="secondary_city_id"/>
+                    <!-- <field name="job_title"/> -->
+                    <field name="status_karyawan" widget="badge" decoration-info="status_karyawan == 'kontrak'" decoration-warning="status_karyawan == 'magang'" decoration-success="status_karyawan == 'permanent'"/>
+                    <field name="start_date"/>
+                    <field name="running_date"/>
+                    <field name="deadline_date"/>
+                    <field name="quota_status"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-primary="state == 'pending'" decoration-warning="state == 'validate'" decoration-danger="state == 'vacant'" decoration-success="state == 'done'"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form View -->
+        <record model="ir.ui.view" id="quota_quota_form">
+            <field name="name">quota.quota.form</field>
+            <field name="model">quota.quota</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="set_done_replace"
+                            string="Approve Replace"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible':['|',('state', '==', 'done'), ('status', '!=', 'replace')]}"
+                        />
+                        <button name="set_pending"
+                            string="Approve"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible':['|', ('state', '!=', 'draft'), ('status', '=', 'replace')]}"
+                        />
+                        <button name="set_validate"
+                            string="Validate"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible':['|', ('state', '!=', 'pending'), ('status', '=', 'replace')]}"
+                        />
+                        <button name="set_vacant"
+                            string="Mark as vacant"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible':['|', ('state', '!=', 'done'), ('status', '=', 'replace')]}"
+                        />
+                        <button name="set_done"
+                            string="Mark as Done"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible':['|', ('state', 'not in', ['validate', 'vacant']), ('status', '=', 'replace')]}"
+                        />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="status" attrs="{'readonly': ['|',('state', '=', 'done'), ('from_ratecard', 'in', [True, False])]}"/>
+                                <field name="partner_id" attrs="{'readonly': ['|',('state', '=', 'done'), ('from_ratecard', '=', True)]}"/>
+                                <field name="quota_id" attrs="{'readonly': ['|',('state', '=', 'done'), ('from_ratecard', '=', True)], 'invisible':[('status', '!=', 'replace')]}"/>
+                                <field name="ratecard_id" attrs="{'readonly': ['|',('state', '=', 'done'), ('from_ratecard', '=', True)]}"/>
+                                <field name="aro_id"/>
+                                <field name="hod_id"/>
+                                <field name="partner_ids" invisible="1"/>
+                                <!-- <field name="ratecard_ids" invisible="1"/> -->
+                                <field name="job_title_ref" invisible="1"/>
+                                <field name="from_ratecard" invisible="1"/>
+                            </group>
+                            <group attrs="{'invisible':[('status', '=', 'replace')]}">
+                                <field name="area" attrs="{'readonly': ['|',('state', '=', 'done'), ('from_ratecard', '=', True)]}"/>
+                                <field name="secondary_city_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="job_title"/>
+                                <field name="status_karyawan" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="quota_ratecard"/>
+                                <field name="quota_publish" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="start_date" attrs="{'readonly': ['|',('state', '=', 'done'), ('from_ratecard', '=', True)]}"/>
+                                <field name="running_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="deadline_date" attrs="{'readonly': ['|',   ('state', '=', 'done'), ('from_ratecard', '=', True)]}"/>
+                                <field name="quota_status" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                                <field name="template_pkwt" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            </group>
+                        </group>
+                        <group attrs="{'invisible':[('status', '=', 'replace')]}">
+                            <field name="kualifikasi" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="quota_quota_view_search">
+            <field name="name">quota.quota.view.search</field>
+            <field name="model">quota.quota</field>
+            <field name="arch" type="xml">
+                <search string="Search Quota">
+                    <field name="name"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Quota Replace" name="group_by_quota_replace" context="{'group_by': 'quota_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="quota_quota_action">
+            <field name="name">Quota</field>
+            <field name="res_model">quota.quota</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('status', '=', 'new')]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="quota_quota_replace_action">
+            <field name="name">Quota</field>
+            <field name="res_model">quota.quota</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('status', '=', 'replace')]</field>
+        </record>
+
+        <menuitem 
+            id="main_quota_quota"
+            name="Quota"
+            web_icon="asb_quota,static/description/icon.png"
+        />
+
+        <menuitem 
+            id="menu_quota_quota"
+            name="Quota"
+            parent="main_quota_quota"
+        />
+
+        <menuitem 
+            id="submenu_quota_quota"
+            name="Quota New"
+            parent="menu_quota_quota"
+
+            action="quota_quota_action"
+        />
+
+        <menuitem 
+            id="submenu_quota_quota_replace"
+            name="Quota Replace"
+            parent="menu_quota_quota"
+
+            action="quota_quota_replace_action"
+        />
+
+    </data>
+</odoo>

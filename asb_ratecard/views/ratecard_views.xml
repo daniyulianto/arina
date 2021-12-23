@@ -1,0 +1,376 @@
+<odoo>
+    <data>
+    <!-- View Tree/List RateCard -->
+
+    <record id="rate_card_view_tree" model="ir.ui.view">
+        <field name="name">rate.card.tree</field>
+        <field name="model">rate.card</field>
+        <field name="arch" type="xml">
+            <tree string="RateCard" js_class="ratecard_list_dashboard">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="aro_id"/>
+                <field name="hod_id"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'quotation'" decoration-success="state == 'approved'"/>
+                <field name="create_uid" widget="many2one_avatar_user"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="rate_card_category_view_tree" model="ir.ui.view">
+        <field name="name">rate.card.category.tree</field>
+        <field name="model">rate.card.category</field>
+        <field name="arch" type="xml">
+            <tree string="RateCardCategory">
+                <field name="name"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="city_city_view_tree" model="ir.ui.view">
+        <field name="name">city.city.tree</field>
+        <field name="model">city.city</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="c_code"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="province_province_view_tree" model="ir.ui.view">
+        <field name="name">province.province.tree</field>
+        <field name="model">province.province</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="p_code"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- View Form RateCard -->
+    
+    <record id="rate_card_view_form" model="ir.ui.view">
+        <field name="name">rate.card.form</field>
+        <field name="model">rate.card</field>
+        <field name="arch" type="xml">
+            <form string="Course Form" js_class="rate_card_form_view">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="set_quotation"
+                        string="Mark as Quotation"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible':[('state', '!=', 'draft')]}"
+                    />
+                    <button name="set_approved"
+                        string="Done"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible':[('state', '!=', 'quotation')]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <field name="is_pkp"/>
+                            <field name="type_contract"/>
+                            <field name="ratecard_category_id"/>
+                            <field name="hide" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="agency_fee" class="click_partner"/>
+                            <br />
+                            <field name="period_payroll_date"/>
+                            <field name="aro_id"/>
+                            <field name="hod_id"/>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <h2 style="font-weight: bold;">RECRUITMENT</h2>
+                            <field name="recruitment_start_date"/>
+                            <field name="recruitment_deadline_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="is_area" invisible="1"/>
+                        <field name="is_quota" invisible="1"/>
+                        <field name="is_job_title" invisible="1"/>
+                        <field name="is_working_day" invisible="1"/>
+                        <field name="is_umk" invisible="1"/>
+                        <field name="is_basic_salary" invisible="1"/>
+                        <field name="is_meal_allowance" invisible="1"/>
+                        <field name="is_transport_allowance" invisible="1"/>
+                        <field name="is_positional_allowance" invisible="1"/>
+                        <field name="is_cost_travelling" invisible="1"/>
+                        <field name="is_motorcycle" invisible="1"/>
+                        <field name="is_rent_computer" invisible="1"/>
+                        <field name="is_bbm" invisible="1"/>
+                        <field name="is_credit" invisible="1"/>
+                        <field name="is_internet" invisible="1"/>
+                        <field name="is_cosmetic_allowance" invisible="1"/>
+                        <field name="is_working_time_allowance" invisible="1"/>
+                        <field name="is_job_allowance" invisible="1"/>
+                        <field name="is_deptstore_allowance" invisible="1"/>
+                        <field name="is_general_allowance" invisible="1"/>
+                        <field name="is_end_of_year_gift" invisible="1"/>
+                        <field name="is_pencadangan_tali_kasih" invisible="1"/>
+                        <field name="is_insentive" invisible="1"/>
+                        <field name="is_total_honor" invisible="1"/>
+                        <field name="is_medical_check_up" invisible="1"/>
+                        <field name="is_kost" invisible="1"/>
+                        <field name="is_medical" invisible="1"/>
+                        <field name="is_bpjs_tk" invisible="1"/>
+                        <field name="is_bpjs_ks" invisible="1"/>
+                        <field name="is_pensiun" invisible="1"/>
+                        <field name="is_overhead" invisible="1"/>
+                        <field name="is_bank_transfer" invisible="1"/>
+                        <field name="is_budget_meeting" invisible="1"/>
+                        <field name="is_stationary" invisible="1"/>
+                        <field name="is_transport_meeting" invisible="1"/>
+                        <field name="is_thr" invisible="1"/>
+                        <field name="is_compensation" invisible="1"/>
+                        <field name="is_total_person" invisible="1"/>
+                        <field name="is_subtotal_honor" invisible="1"/>
+                        <field name="is_subtotal_honor_per_year" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Rate Card Line">
+                            <field name="ratecard_line_ids" nolabel="1" attrs="{'invisible':[('hide', '=', True)]}">
+                                <tree string="Rate Card" editable="bottom">
+                                    <field name="area" attrs="{'column_invisible': [('parent.is_area', '=', False)]}" />
+                                    <field name="quota" attrs="{'column_invisible': [('parent.is_quota', '=', False)]}"/>
+                                    <field name="job_title" attrs="{'column_invisible': [('parent.is_job_title', '=', False)]}"/>
+                                    <field name="working_day" attrs="{'column_invisible': [('parent.is_working_day', '=', False)]}" />
+                                    <field name="umk" attrs="{'column_invisible': [('parent.is_umk', '=', False)]}"/>
+                                    <field name="basic_salary" attrs="{'column_invisible': [('parent.is_basic_salary', '=', False)]}"/>                                       
+                                    <field name="meal_allowance" attrs="{'column_invisible': [('parent.is_meal_allowance', '=', False)]}" />
+                                    <field name="transport_allowance" attrs="{'column_invisible': [('parent.is_transport_allowance', '=', False)]}" />
+                                    <field name="positional_allowance" attrs="{'column_invisible': [('parent.is_positional_allowance', '=', False)]}" />
+                                    <field name="cost_travelling" attrs="{'column_invisible': [('parent.is_cost_travelling', '=', False)]}" />
+                                    <field name="motorcycle" attrs="{'column_invisible': [('parent.is_motorcycle', '=', False)]}"/>
+                                    <field name="rent_computer" attrs="{'column_invisible': [('parent.is_rent_computer', '=', False)]}"/>                                        
+                                    <field name="bbm" attrs="{'column_invisible': [('parent.is_bbm', '=', False)]}" />
+                                    <field name="credit" attrs="{'column_invisible': [('parent.is_credit', '=', False)]}" />
+                                    <field name="internet" attrs="{'column_invisible': [('parent.is_internet', '=', False)]}" />
+                                    <field name="cosmetic_allowance" attrs="{'column_invisible': [('parent.is_cosmetic_allowance', '=', False)]}"/>                                       
+                                    <field name="working_time_allowance" attrs="{'column_invisible': [('parent.is_working_time_allowance', '=', False)]}"/>                                       
+                                    <field name="job_allowance" attrs="{'column_invisible': [('parent.is_job_allowance', '=', False)]}"/>                                       
+                                    <field name="deptstore_allowance" attrs="{'column_invisible': [('parent.is_deptstore_allowance', '=', False)]}"/>                                       
+                                    <field name="general_allowance" attrs="{'column_invisible': [('parent.is_general_allowance', '=', False)]}"/>                                       
+                                    <field name="end_of_year_gift" attrs="{'column_invisible': [('parent.is_end_of_year_gift', '=', False)]}"/>                                       
+                                    <field name="pencadangan_tali_kasih" attrs="{'column_invisible': [('parent.is_pencadangan_tali_kasih', '=', False)]}" />
+                                    <field name="insentive" attrs="{'column_invisible': [('parent.is_insentive', '=', False)]}" />
+                                    <field name="total_honor" attrs="{'column_invisible': [('parent.is_total_honor', '=', False)]}" />
+                                    <field name="medical_check_up" attrs="{'column_invisible': [('parent.is_medical_check_up', '=', False)]}"/>
+                                    <field name="kost" attrs="{'column_invisible': [('parent.is_kost', '=', False)]}"/>
+                                    <field name="medical" attrs="{'column_invisible': [('parent.is_medical', '=', False)]}"/>
+                                    <field name="bpjs_tk" attrs="{'column_invisible': [('parent.is_bpjs_tk', '=', False)]}"/>
+                                    <field name="bpjs_ks" attrs="{'column_invisible': [('parent.is_bpjs_ks', '=', False)]}"/>
+                                    <field name="pensiun" attrs="{'column_invisible': [('parent.is_pensiun', '=', False)]}"/>
+                                    <field name="overhead" attrs="{'column_invisible': [('parent.is_overhead', '=', False)]}"/>
+                                    <field name="bank_transfer" attrs="{'column_invisible': [('parent.is_bank_transfer', '=', False)]}"/>
+                                    <field name="budget_meeting" attrs="{'column_invisible': [('parent.is_budget_meeting', '=', False)]}"/>
+                                    <field name="stationary" attrs="{'column_invisible': [('parent.is_stationary', '=', False)]}"/>
+                                    <field name="transport_meeting" attrs="{'column_invisible': [('parent.is_transport_meeting', '=', False)]}"/>
+                                    <field name="thr" attrs="{'column_invisible': [('parent.is_thr', '=', False)]}"/>
+                                    <field name="compensation" attrs="{'column_invisible': [('parent.is_compensation', '=', False)]}"/>
+                                    <field name="total_person" attrs="{'column_invisible': [('parent.is_total_person', '=', False)]}"/>
+                                    <field name="subtotal_honor" attrs="{'column_invisible': [('parent.is_subtotal_honor', '=', False)]}"/>
+                                    <field name="subtotal_honor_per_year" attrs="{'column_invisible': [('parent.is_subtotal_honor_per_year', '=', False)]}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Other Information">
+                            <group  >
+                                <group>
+                                    <field name="purchase_ref"/>
+                                    <field name="purchase_date"/>
+                                    <field name="purchase_amount"/>
+                                    <field name="realization_amount"/>
+                                    <field name="purchase_outstanding_amount"/>
+                                </group>
+                                <group>
+                                    <field name="alert_amount"/>
+                                    <field name="total_quota"/>
+                                    <field name="total_filled"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div id="snackbar">Some text some message..</div>
+            </form>
+        </field>
+    </record>
+
+    <record id="rate_card_category_view_form" model="ir.ui.view">
+        <field name="name">rate.card.category.form</field>
+        <field name="model">rate.card.category</field>
+        <field name="arch" type="xml">
+            <form string="Course Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="is_active"/>
+                    </group>
+                    <notebook>
+                        <page string="Component">
+                            <group>
+                                <field name="ratecard_category_line_ids" nolabel="1">
+                                    <tree string="Rate Card" editable="bottom" create="false" delete="false">
+                                        <field name="field_name"/>
+                                        <field name="field_desc"/>
+                                        <field name="field_code"/>
+                                        <field name="field_condition"/>
+                                        <field name="field_active"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="city_city_view_form" model="ir.ui.view">
+        <field name="name">city.city.form</field>
+        <field name="model">city.city</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="c_code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="province_province_view_form" model="ir.ui.view">
+        <field name="name">province.province.form</field>
+        <field name="model">province.province</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="p_code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action Window -->
+
+    <record id="rate_card_action" model="ir.actions.act_window">
+        <field name="name">Rate Card</field>
+        <field name="res_model">rate.card</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="rate_card_category_action" model="ir.actions.act_window">
+        <field name="name">Rate Card Category</field>
+        <field name="res_model">rate.card.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="city_city_action" model="ir.actions.act_window">
+        <field name="name">Kota</field>
+        <field name="res_model">city.city</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="province_province_action" model="ir.actions.act_window">
+        <field name="name">Provinsi</field>
+        <field name="res_model">province.province</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+
+    <menuitem 
+        id="rate_card_main" 
+        name="Rate Card" 
+        sequence="1"
+        web_icon="asb_ratecard,static/description/icon.png"
+    />
+
+    <menuitem 
+        id="rate_card_tree"
+        parent="rate_card_main" 
+        name="Rate Card"
+        sequence="20"
+        action="rate_card_action"
+    />
+
+    <menuitem 
+        id="rate_card_catregory_tree"
+        parent="rate_card_main" 
+        name="Rate Card Category"
+        sequence="40"
+        action="rate_card_category_action"
+    />
+
+    <menuitem 
+        id="configurations"
+        parent="rate_card_main" 
+        name="Configuration"
+        sequence="90"
+    />
+
+    <menuitem 
+        id="city_city_tree"
+        parent="configurations" 
+        name="Kota"
+        sequence="40"
+        action="city_city_action"
+    />
+
+    <menuitem 
+        id="province_province_tree"
+        parent="configurations" 
+        name="Provinsi"
+        sequence="50"
+        action="province_province_action"
+    />
+
+
+    </data>
+</odoo>

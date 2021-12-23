@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record model="ir.ui.view" id="hr_employee_resign_tree">
+            <field name="name">hr.employee.resign.tree</field>
+            <field name="model">hr.employee.resign</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="officer_id"/>
+                    <field name="employee_id"/>
+                    <field name="ratecard_id"/>
+                    <field name="departure_reason"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record model="ir.ui.view" id="hr_employee_resign_form">
+            <field name="name">hr.employee.resign.form</field>
+            <field name="model">hr.employee.resign</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_submit"
+                                string="Submit"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state', '!=', 'draft')]}"
+                        />
+                        <button name="action_confirm"
+                                string="Confirm"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state', '!=', 'submit')]}"
+                        />
+                        <button name="action_only_employee"
+                                string="Only Employee"
+                                type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('state', '!=', 'submit')]}"
+                        />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="officer_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group string="Employee Data">
+                            <field name="employee_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="nip"/>
+                            <field name="partner_id"/>
+                            <field name="ratecard_id"/>
+                        </group>
+                        <group id="info" string="Departure Info">
+                            <field name="employee_id" invisible="1" />
+                            <field name="departure_reason" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="resign_type" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="departure_description" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="archive_private_address" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group id="date" string="Departure Date">
+                            <field name="departure_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="set_date_end" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_employee_resign_action">
+            <field name="name">Employee Resign</field>
+            <field name="res_model">hr.employee.resign</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="menu_hr_employee_resign"
+                name="Employee Resign"
+                parent="hr.menu_hr_employee_payroll"
+                action="hr_employee_resign_action"
+        />
+    </data>
+</odoo>

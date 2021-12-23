@@ -1,0 +1,28 @@
+<odoo>
+    <!-- Category Group -->
+
+    <record id="module_asb_ratecard" model="ir.module.category">
+        <field name="name">Rate Card</field>
+    </record>
+
+    <!-- Group -->
+
+    <record id="group_user_aro" model="res.groups">
+        <field name="name">ARO</field>
+        <!-- <field name="users" eval="[(4, ref('base.user_admin'))]"/> -->
+        <field name="category_id" ref="module_asb_ratecard"/>
+    </record> 
+
+    <record id="group_user_hod" model="res.groups">
+        <field name="name">HOD</field>
+        <!-- <field name="users" eval="[(4, ref('base.user_admin'))]"/> -->
+        <field name="category_id" ref="module_asb_ratecard"/>
+    </record> 
+
+    <record id="group_administrator" model="res.groups">
+        <field name="name">Administrator</field>
+        <!-- <field name="implied_ids" eval="[(4, ref('base.user_admin'))]"/> -->
+        <field name="category_id" ref="module_asb_ratecard"/>
+    </record> 
+
+</odoo>

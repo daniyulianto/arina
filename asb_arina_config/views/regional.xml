@@ -1,0 +1,160 @@
+<odoo>
+    <data>
+        <record id="city_city_view_tree" model="ir.ui.view">
+            <field name="name">city.city.tree</field>
+            <field name="model">city.city</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="c_code"/>
+                    <field name="province_id"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="province_province_view_tree" model="ir.ui.view">
+            <field name="name">province.province.tree</field>
+            <field name="model">province.province</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="p_code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="regional_regional_view_tree" model="ir.ui.view">
+            <field name="name">region.region.tree</field>
+            <field name="model">region.region</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="r_code"/>
+                    <field name="name"/>
+                    <field string='Kantor Perwakilan' name="city_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="city_city_view_form" model="ir.ui.view">
+            <field name="name">city.city.form</field>
+            <field name="model">city.city</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="c_code"/>
+                                <field name="province_id"/>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="province_province_view_form" model="ir.ui.view">
+            <field name="name">province.province.form</field>
+            <field name="model">province.province</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="p_code"/>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="regional_regional_view_form" model="ir.ui.view">
+            <field name="name">region.region.form</field>
+            <field name="model">region.region</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="r_code"/>
+                                <field name="name"/>
+                                <field name="city_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="city_city_action" model="ir.actions.act_window">
+            <field name="name">Kota</field>
+            <field name="res_model">city.city</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="province_province_action" model="ir.actions.act_window">
+            <field name="name">Provinsi</field>
+            <field name="res_model">province.province</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="regional_regional_action" model="ir.actions.act_window">
+            <field name="name">Regional</field>
+            <field name="res_model">region.region</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+                id="arina_config"
+                name="Arina Config"
+                sequence="1"
+                web_icon="asb_arina_config,static/description/icon.png"
+        />
+
+        <menuitem
+                id="regional"
+                parent="arina_config"
+                name="Regional"
+                sequence="10"
+        />
+
+        <menuitem
+                id="regional_regional"
+                parent="regional"
+                name="Regional"
+                sequence="30"
+                action="regional_regional_action"
+        />
+
+        <menuitem
+                id="city_city_tree"
+                parent="regional"
+                name="Kota"
+                sequence="40"
+                action="city_city_action"
+        />
+
+        <menuitem
+                id="province_province_tree"
+                parent="regional"
+                name="Provinsi"
+                sequence="50"
+                action="province_province_action"
+        />
+
+    </data>
+</odoo>
