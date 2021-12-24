@@ -7,11 +7,11 @@ from odoo.exceptions import UserError
 class Applicant(models.Model):
     _inherit = 'hr.applicant'
 
-    ratecard_id = fields.Many2one('rate.card', string='Ratecard', compute='_compute_ratecard', store=True, )
-    quota_id = fields.Many2one('quota.quota', string='Quota', compute='_compute_quota', store=True, )
+    ratecard_id = fields.Many2one('rate.card', string='Ratecard', related='job_id.ratecard_id', store=True)
+    quota_id = fields.Many2one('quota.quota', string='Quota', related='job_id.quota_id', store=True)
     stage_arina = fields.Selection(
         related='stage_id.stage_arina', store=True)
-    employee_id = fields.Many2one('hr.employee', string='ARO', compute='_compute_aro', store=True, )
+    employee_id = fields.Many2one('hr.employee', string='ARO', related='job_id.aro_id', store=True)
     karyawan_status = fields.Selection(string='Status Karyawan', related='quota_id.status_karyawan', store=True)
     grade = fields.Char(string='Grade')
     ktp_address = fields.Char(string='Alamat KTP')
@@ -123,21 +123,6 @@ class Applicant(models.Model):
                     'asb_hr_recruitment.group_hr_recruitment_ro2')
             else:
                 rec.is_allowed = True
-
-    @api.depends('job_id')
-    def _compute_ratecard(self):
-        for applicant in self:
-            applicant.ratecard_id = applicant.job_id.ratecard_id.id or False
-
-    @api.depends('job_id')
-    def _compute_quota(self):
-        for applicant in self:
-            applicant.quota_id = applicant.job_id.quota_id.id or False
-
-    @api.depends('job_id')
-    def _compute_aro(self):
-        for applicant in self:
-            applicant.employee_id = applicant.job_id.aro_id.id or False
 
     def action_nextstep(self):
         for rec in self:
