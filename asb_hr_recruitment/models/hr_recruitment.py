@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 class Applicant(models.Model):
     _inherit = 'hr.applicant'
 
-    ratecard_id = fields.Many2one('rate.card', string='Ratecard Test', related='job_id.ratecard_id', store=True)
+    ratecard_id = fields.Many2one('rate.card', string='Ratecard', related='job_id.ratecard_id', store=True)
     quota_id = fields.Many2one('quota.quota', string='Quota', related='job_id.quota_id', store=True)
     stage_arina = fields.Selection(
         related='stage_id.stage_arina', store=True)
