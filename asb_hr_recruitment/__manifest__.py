@@ -3,7 +3,7 @@
     'name': "Custome HR Recuitment",
 
     'summary': """
-        HR Recuitment Module Test""",
+        HR Recuitment Module""",
 
     'description': """
         HR Ratecard Module For PT Arina Multi Karya
