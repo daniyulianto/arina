@@ -28,6 +28,13 @@ class CustomeWebsiteHrRecruitment(WebsiteHrRecruitment):
         applicant = request.env['hr.applicant'].sudo().search([])
         for rec in applicant:
             nik_applicant.append(rec.no_ktp)
+        dict_bank = []
+        for res_bank in bank:
+            dict_bank.append({
+                'id': res_bank.id,
+                'bank_name': res_bank.name,
+                'digit_bank': res_bank.total_digit_bank
+            })
         if 'website_hr_recruitment_error' in request.session:
             error = request.session.pop('website_hr_recruitment_error')
             default = request.session.pop('website_hr_recruitment_default')
@@ -41,6 +48,7 @@ class CustomeWebsiteHrRecruitment(WebsiteHrRecruitment):
             'bank': bank,
             'state': 'first',
             'nik_applicant': nik_applicant,
+            'dict_bank': json.dumps(dict_bank),
         })
 
     @http.route('''/job/success/''', type='http', auth="public", website=True, sitemap=True)

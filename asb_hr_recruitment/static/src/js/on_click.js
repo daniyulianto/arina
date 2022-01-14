@@ -251,6 +251,8 @@ onClick = () => {
     }
     else if (state == 'four') {
         state = document.getElementsByName("state").value;
+        const digit_bank = $('#bank_name option:selected').attr('digit');
+        const digit_bank_value = nomor_rekening.value.length
         let regex_account_number = /^\d+$/;
         if (bank_name.value == null | bank_name.value === undefined | bank_name.value == '' |
             nomor_rekening.value == null | nomor_rekening.value === undefined | nomor_rekening.value == '' |
@@ -284,6 +286,10 @@ onClick = () => {
         else if (pict_vaksin.value && pict_vaksin.files[0].size > 2097152) {
             alert("Ukuran File/Gambar Sertifikat Vaksin Max-2Mb!")
             pict_vaksin.value = "";
+        }
+        else if (digit_bank != digit_bank_value ) {
+            alert("Digit Bank tidak sesuai dengan pilihan Bank!")
+            nomor_rekening.value = "";
         }
         else if(have_npwp.checked){
             if (nomor_npwp.value == null | nomor_npwp.value === undefined | nomor_npwp.value == '' |

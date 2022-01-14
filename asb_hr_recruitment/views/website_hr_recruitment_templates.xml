@@ -151,7 +151,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment5" type="text" class="form-control s_website_form_input" name="partner_name" required="1" />
+                                                        <input id="recruitment5" type="text" class="form-control s_website_form_input" name="partner_name"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -162,7 +162,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment6" type="email" class="form-control s_website_form_input" name="email_from" required="1" />
+                                                        <input id="recruitment6" type="email" class="form-control s_website_form_input" name="email_from"  />
                                                     </div>
                                                 </div>
                                             </div>
@@ -173,7 +173,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment7" type="tel" class="form-control s_website_form_input" name="partner_phone" required="1"  placeholder="e.g 6281500000000"/>
+                                                        <input id="recruitment7" type="tel" class="form-control s_website_form_input" name="partner_phone"   placeholder="e.g 6281500000000"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -198,7 +198,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input type="date" id="birth" name="birth" class="form-control o_website_form_date datepicker" placeholder="Date of Birth" required="1"/>
+                                                        <input type="date" id="birth" name="birth" class="form-control o_website_form_date datepicker" placeholder="Date of Birth" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,7 +209,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <select class="form-control o_website_form_input" name="gender_employee" id="gender_employee" required="1">
+                                                        <select class="form-control o_website_form_input" name="gender_employee" id="gender_employee" >
                                                             <option value="male">Laki-Laki</option>
                                                             <option value="female">Perempuan</option>
                                                         </select>
@@ -222,10 +222,10 @@
                                                         <span class="s_website_form_label_content">Tinggi dan Berat</span>
                                                     </label>
                                                     <div class="col-lg-3 col-md-4 ">
-                                                        <input type="number" name="height" id="height" class="form-control o_website_form_input" placeholder="Tinggi (CM)" required="1"/>
+                                                        <input type="number" name="height" id="height" class="form-control o_website_form_input" placeholder="Tinggi (CM)" />
                                                     </div>
                                                     <div class="col-lg-4 col-md-4">
-                                                        <input type="number" name="weight" id="weight" class="form-control o_website_form_input" placeholder="Berat (KG)" required="1"/>
+                                                        <input type="number" name="weight" id="weight" class="form-control o_website_form_input" placeholder="Berat (KG)" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,7 +236,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <select class="form-control o_website_form_input" name="religion_employee" id="religion" required="1">
+                                                        <select class="form-control o_website_form_input" name="religion_employee" id="religion" >
                                                             <option value="islam">Islam</option>
                                                             <option value="kristen">Kristen</option>
                                                             <option value="katholik">Katholik</option>
@@ -254,7 +254,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment8" type="text" class="form-control s_website_form_input" name="partner_address" required="1" />
+                                                        <input id="recruitment8" type="text" class="form-control s_website_form_input" name="partner_address"  />
                                                     </div>
                                                 </div>
                                             </div>
@@ -279,7 +279,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment9" type="text" class="form-control s_website_form_input" name="partner_domicile" required="1" />
+                                                        <input id="recruitment9" type="text" class="form-control s_website_form_input" name="partner_domicile"  />
                                                     </div>
                                                 </div>
                                             </div>
@@ -318,7 +318,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <select class="form-control o_website_form_input" name="status_nikah" id="status_nikah" required="1">
+                                                        <select class="form-control o_website_form_input" name="status_nikah" id="status_nikah" >
                                                             <option value="k0">K/0 - Nikah, Tanpa Anak</option>
                                                             <option value="k1">K/1 - Nikah, Anak 1</option>
                                                             <option value="k2">K/2 - Nikah, Anak 2</option>
@@ -338,7 +338,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment10" type="text" class="form-control s_website_form_input" name="social_media_name" required="1"/>
+                                                        <input id="recruitment10" type="text" class="form-control s_website_form_input" name="social_media_name" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -365,7 +365,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment11" type="file"  accept="image/png,application/pdf"  class="form-control s_website_form_input" name="foto_ijazah" required="1"/>
+                                                        <input id="recruitment11" type="file"  accept="image/png,application/pdf"  class="form-control s_website_form_input" name="foto_ijazah" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -376,7 +376,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment12" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_skck" required="1"/>
+                                                        <input id="recruitment12" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_skck" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -387,7 +387,7 @@
                                                         <span class="s_website_form_mark"> *</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment13" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_profile" required="1"/>
+                                                        <input id="recruitment13" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_profile" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -423,7 +423,8 @@
                                                     <div class="col-sm">
                                                         <select id="bank_name" name="bank_name" required="True" placeholder="Nama Bank" class="form-control">
                                                             <t t-foreach="bank" t-as="bnk">
-                                                                <option t-att-value="bnk.id" t-esc="bnk.name"/></t>
+                                                                <option t-att-value="bnk.id" t-esc="bnk.name" t-att-digit="bnk.total_digit_bank"/>
+                                                            </t>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -446,7 +447,7 @@
                                                         <span class="s_website_form_mark">*</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="recruitment17" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="tabungan_image" required="1"/>
+                                                        <input id="recruitment17" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="tabungan_image" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -570,7 +571,7 @@
                                                     </label>
                                                     <div class="col-sm">
                                                         <select class="form-control o_website_form_input" name="status_vaksin">
-                                                            <option value="vaksin">Sudah Vaksi</option>
+                                                            <option value="vaksin">Sudah Vaksin</option>
                                                             <option value="not_vaksin">Belum Vaksin</option>
                                                         </select>
                                                     </div>
@@ -595,7 +596,7 @@
                                                         <span class="s_website_form_mark">*</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="kk_number" type="text" class="form-control s_website_form_input" name="kk_number" required="1"/>
+                                                        <input id="kk_number" type="text" class="form-control s_website_form_input" name="kk_number" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -606,7 +607,7 @@
                                                         <span class="s_website_form_mark">*</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="foto_kk" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_kk" required="1"/>
+                                                        <input id="foto_kk" type="file"  accept="image/png,application/pdf" class="form-control s_website_form_input" name="foto_kk" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -617,7 +618,7 @@
                                                         <span class="s_website_form_mark">*</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="mother_name" type="text" class="form-control s_website_form_input" name="mother_name" required="1"/>
+                                                        <input id="mother_name" type="text" class="form-control s_website_form_input" name="mother_name" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -698,7 +699,7 @@
                                                         <span class="s_website_form_mark">*</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="contact_emergency" type="text" class="form-control s_website_form_input" name="contact_emergency" required="1"/>
+                                                        <input id="contact_emergency" type="text" class="form-control s_website_form_input" name="contact_emergency" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -709,7 +710,7 @@
                                                         <span class="s_website_form_mark">*</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <input id="contact_emergency_number" type="text" class="form-control s_website_form_input" name="contact_emergency_number" required="1"/>
+                                                        <input id="contact_emergency_number" type="text" class="form-control s_website_form_input" name="contact_emergency_number" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -720,7 +721,7 @@
                                                         <span class="s_website_form_mark">*</span>
                                                     </label>
                                                     <div class="col-sm">
-                                                        <select class="form-control o_website_form_input" id="jenis_relasi" name="jenis_relasi" required="1">
+                                                        <select class="form-control o_website_form_input" id="jenis_relasi" name="jenis_relasi" >
                                                             <option value="parent">Orang Tua</option>
                                                             <option value="husband_wife">Suami/Istri</option>
                                                             <option value="siblings">Sudara Kandung</option>
